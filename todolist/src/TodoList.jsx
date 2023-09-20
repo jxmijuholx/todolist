@@ -32,6 +32,11 @@ function TodoList() {
         setTodos(updatedTodos);
     };
 
+    const deleteTodo = (index) => {
+        const updatedTodos = todos.filter((todo, i) => i !== index);
+        setTodos(updatedTodos);
+    };
+
     return (
         <>
             <input
@@ -62,6 +67,9 @@ function TodoList() {
                             </td>
                             <td>{todo.description}</td>
                             <td>{todo.date}</td>
+                            <td>
+                                <button onClick={() => deleteTodo(index)}>Delete</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
