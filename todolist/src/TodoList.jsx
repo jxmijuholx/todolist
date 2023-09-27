@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TodoTable from "./components/TodoTable";
 
 function TodoList() {
     const [desc, setDesc] = useState('');
@@ -19,7 +20,7 @@ function TodoList() {
         const newTodo = {
             description: desc,
             date: date,
-            completed: false, // Lisää uusi kenttä: completed
+            completed: false,
         };
         setTodos([...todos, newTodo]);
         setDesc('');
@@ -54,26 +55,7 @@ function TodoList() {
                 value={date}
             />
             <button onClick={addTodo}>Add</button>
-            <table>
-                <tbody>
-                    {todos.map((todo, index) => (
-                        <tr key={index}>
-                            <td>
-                                <input
-                                    type="checkbox"
-                                    checked={todo.completed}
-                                    onChange={() => toggleCompleted(index)}
-                                />
-                            </td>
-                            <td>{todo.description}</td>
-                            <td>{todo.date}</td>
-                            <td>
-                                <button onClick={() => deleteTodo(index)}>Delete</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            <TodoTable todos={todos} onDelete={deleteTodo} onCheck={toggleCompleted} />
         </>
     );
 }
