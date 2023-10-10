@@ -15,12 +15,13 @@ const TodoTable = ({ todos, onDelete, gridRef }) => {
     };
 
     const columns = [
-        { field: 'description', sortable: true, filter: true },
-        { field: 'date', sortable: true, filter: true },
+        { field: 'description', sortable: true, filter: true, floatingFilter: true },
+        { field: 'date', sortable: true, filter: true, floatingFilter: true },
         {
             field: 'priority',
             sortable: true,
             filter: true,
+            floatingFilter: true,
             cellStyle: (params) =>
                 params.value === 'High' ? { color: 'red' } : { color: 'black' },
         },
@@ -39,6 +40,8 @@ const TodoTable = ({ todos, onDelete, gridRef }) => {
                 <AgGridReact
                     gridOptions={{
                         domLayout: 'autoHeight',
+                        animateRows: true,
+                        floatingFiltersHeight: 70
                     }}
                     rowSelection="single"
                     columnDefs={columns}
