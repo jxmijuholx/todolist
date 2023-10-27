@@ -1,10 +1,10 @@
-
 import React, { useState, useRef } from 'react';
 import TodoTable from './TodoTable';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import DatePicker from '@mui/lab/DatePicker';
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
 const TodoList = () => {
     const [todo, setTodo] = useState({
@@ -53,6 +53,7 @@ const TodoList = () => {
             date: date,
         });
     }
+
     return (
         <div>
             <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
@@ -63,13 +64,15 @@ const TodoList = () => {
                     value={todo.desc}
                     onChange={inputChanged}
                 />
-                <DatePicker
-                    label="Date"
-                    inputFormat="yyyy-MM-dd"
-                    value={todo.date}
-                    onChange={changeDate}
-                    renderInput={(params) => <TextField {...params} />}
-                />
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                        label="Date"
+                        inputFormat="DD.MM.YYYY"
+                        value={todo.date}
+                        onChange={changeDate}
+                        renderInput={(params) => <TextField {...params} />}
+                    />
+                </LocalizationProvider>
                 <TextField
                     label="Priority"
                     variant="standard"
