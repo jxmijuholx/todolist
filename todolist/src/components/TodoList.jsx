@@ -1,4 +1,3 @@
-// TodoList.js
 import React, { useState, useRef } from 'react';
 import TodoTable from './TodoTable';
 
@@ -40,6 +39,10 @@ const TodoList = () => {
         }
     };
 
+    const clearTodos = () => {
+        setTodos([]);
+    };
+
     return (
         <>
             <input
@@ -65,6 +68,7 @@ const TodoList = () => {
             />
             <button onClick={addTodo}>Add</button>
             <button onClick={deleteTodo}>Delete</button>
+            <button onClick={clearTodos}>Clear</button>
             <TodoTable todos={todos} onDelete={deleteTodo} gridRef={gridRef} />
         </>
     );
